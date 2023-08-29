@@ -59,7 +59,7 @@ def main():
 
     else:
         # showcase
-        cert_file = "test.der"
+        cert_file = "testdata/test.der"
         with open(cert_file, 'rb') as fd:
             cert = fd.read()
         cert_obj = crypto.load_certificate(crypto.FILETYPE_ASN1, cert)

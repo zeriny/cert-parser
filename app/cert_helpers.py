@@ -327,7 +327,7 @@ def parse_attribute_detail(cert_json):
 def parse_certinfo(cert):
     """
     parse the information of an X.509 certificate
-    :param cert: the OpenSSL certificate object
+    :param cert: The X509 object (e.g., crypto.load_certificate(crypto.FILETYPE_ASN1, cert_data_string))
     :return: certificate attributes dict
     """
     cert_json = dict()
@@ -615,7 +615,7 @@ def parse_ct_entry(leaf_path, extra_path):
     Parse the Merkle Tree of a CT entry
     :param leaf_path: path to .leaf file
     :param extra_path: path to .extra file
-    :return: the chain of certificate (raw data)
+    :return: the chain of certificate (The X509 object)
     """
     try:
         f=open(leaf_path,"rb")
