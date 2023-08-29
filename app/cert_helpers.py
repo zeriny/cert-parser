@@ -615,7 +615,7 @@ def parse_ct_entry(leaf_path, extra_path):
     Parse the Merkle Tree of a CT entry
     :param leaf_path: path to .leaf file
     :param extra_path: path to .extra file
-    :return: the chain of certificate (The X509 object)
+    :return: the chain of certificate info_dict
     """
     try:
         f=open(leaf_path,"rb")
@@ -648,5 +648,17 @@ def parse_ct_entry(leaf_path, extra_path):
     f_e.close()
     f.close()
 
-    return cert_chain
-
+    ###start to get information from certificate chains
+    n = 0
+    output_chain = []
+    for certobj in cert_chain:
+        n = n+1
+        cert_json={}
+        ###get cert infos
+        try:
+            cert_json = parse_certinfo(certobj)
+        except Exception as e:
+            print("Unexpected error:{}".format(e.args[0]))
+            continue
+        output_chain.append(cert_json)
+    return output_chain
